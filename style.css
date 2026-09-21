@@ -1,1 +1,893 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Montserrat", sans-serif;
+
+    color: #40382e;
+
+    background:
+        radial-gradient(
+            circle at 50% 5%,
+            #fff7ce 0%,
+            transparent 32%
+        ),
+        linear-gradient(
+            180deg,
+            #fffdf8 0%,
+            #fffaf0 55%,
+            #fff6df 100%
+        );
+
+    overflow-x: hidden;
+}
+
+
+/* LUZ DEL FONDO */
+
+.background-light {
+
+    position: fixed;
+
+    width: 500px;
+    height: 500px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 210, 50, 0.13);
+
+    filter: blur(90px);
+
+    top: 10%;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    pointer-events: none;
+
+    z-index: -1;
+}
+
+
+/* ==========================
+   PORTADA
+========================== */
+
+.hero {
+
+    min-height: 100vh;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+
+    padding: 60px 20px;
+}
+
+
+.hero-content {
+
+    width: 100%;
+
+    max-width: 760px;
+}
+
+
+.eyebrow {
+
+    font-size: 12px;
+
+    letter-spacing: 6px;
+
+    color: #a2873f;
+
+    margin-bottom: 22px;
+}
+
+
+h1 {
+
+    font-family: "Cormorant Garamond", serif;
+
+    font-size: clamp(50px, 9vw, 88px);
+
+    font-weight: 500;
+
+    line-height: 0.95;
+
+    color: #383126;
+
+    margin-bottom: 28px;
+}
+
+
+.intro {
+
+    max-width: 570px;
+
+    margin: auto;
+
+    font-size: clamp(16px, 2vw, 19px);
+
+    line-height: 1.8;
+
+    color: #716654;
+}
+
+
+/* FLOR PORTADA */
+
+.mini-tulip {
+
+    width: 155px;
+
+    margin: 25px auto 5px;
+
+    animation: flowerEntrance 1.6s ease forwards;
+}
+
+
+.mini-tulip img {
+
+    width: 100%;
+
+    display: block;
+
+    filter:
+        drop-shadow(
+            0 15px 20px rgba(80, 60, 20, 0.15)
+        );
+}
+
+
+@keyframes flowerEntrance {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(40px)
+            scale(0.9);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+
+    }
+
+}
+
+
+/* BAJAR */
+
+.scroll-message {
+
+    margin-top: 18px;
+
+    font-size: 13px;
+
+    color: #8a7a60;
+
+    letter-spacing: 0.5px;
+}
+
+
+.arrow {
+
+    font-size: 28px;
+
+    margin-top: 8px;
+
+    animation: arrowMove 1.5s infinite;
+}
+
+
+@keyframes arrowMove {
+
+    0%,
+    100% {
+
+        transform: translateY(0);
+
+        opacity: 0.5;
+
+    }
+
+    50% {
+
+        transform: translateY(10px);
+
+        opacity: 1;
+
+    }
+
+}
+
+
+/* ==========================
+   HISTORIA
+========================== */
+
+.story {
+
+    max-width: 1150px;
+
+    margin: auto;
+
+    padding: 40px 20px;
+
+    display: grid;
+
+    grid-template-columns: 370px 1fr;
+
+    gap: 55px;
+}
+
+
+/* RAMO FIJO */
+
+.bouquet-area {
+
+    position: sticky;
+
+    top: 25px;
+
+    height: fit-content;
+
+    text-align: center;
+
+    padding: 25px 10px;
+
+    background: rgba(255, 255, 255, 0.5);
+
+    border-radius: 28px;
+
+    border:
+        1px solid rgba(190, 160, 90, 0.15);
+
+    backdrop-filter: blur(8px);
+
+    box-shadow:
+        0 18px 45px rgba(75, 60, 25, 0.08);
+}
+
+
+.bouquet-title {
+
+    font-family: "Cormorant Garamond", serif;
+
+    font-size: 25px;
+
+    color: #927d4e;
+}
+
+
+.bouquet-wrapper {
+
+    width: 330px;
+
+    max-width: 100%;
+
+    height: 410px;
+
+    margin: 15px auto 0;
+
+    position: relative;
+}
+
+
+.bouquet {
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 3;
+}
+
+
+/* FLORES DEL RAMO */
+
+.bouquet-flower {
+
+    position: absolute;
+
+    left: 50%;
+
+    bottom: 70px;
+
+    width: var(--width);
+
+    opacity: 0;
+
+    transform:
+
+        translateX(-50%)
+
+        translateX(var(--x))
+
+        translateY(calc(var(--y) + 80px))
+
+        rotate(var(--rotate))
+
+        scale(0.7);
+
+    transform-origin: bottom center;
+
+    transition:
+
+        opacity 1s ease,
+
+        transform 1.2s cubic-bezier(.2, .8, .2, 1);
+}
+
+
+.bouquet-flower.show {
+
+    opacity: 1;
+
+    transform:
+
+        translateX(-50%)
+
+        translateX(var(--x))
+
+        translateY(var(--y))
+
+        rotate(var(--rotate))
+
+        scale(var(--scale));
+}
+
+
+.bouquet-flower img {
+
+    display: block;
+
+    width: 100%;
+
+    filter:
+        drop-shadow(
+            0 12px 13px rgba(45, 55, 20, 0.13)
+        );
+}
+
+
+/* PAPEL RAMO */
+
+.wrapper-paper {
+
+    position: absolute;
+
+    bottom: 15px;
+
+    width: 165px;
+
+    height: 190px;
+
+    z-index: 2;
+
+    background:
+        linear-gradient(
+            180deg,
+            #f8eed7,
+            #e9d5ac
+        );
+
+    box-shadow:
+        0 10px 25px rgba(80, 60, 20, 0.08);
+}
+
+
+.wrapper-left {
+
+    left: 30px;
+
+    clip-path:
+        polygon(
+            0 0,
+            100% 20%,
+            77% 100%,
+            16% 100%
+        );
+
+    transform: rotate(-9deg);
+}
+
+
+.wrapper-right {
+
+    right: 30px;
+
+    clip-path:
+        polygon(
+            0 20%,
+            100% 0,
+            84% 100%,
+            23% 100%
+        );
+
+    transform: rotate(9deg);
+}
+
+
+/* CINTA */
+
+.ribbon {
+
+    position: absolute;
+
+    z-index: 5;
+
+    bottom: 78px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 77px;
+
+    height: 17px;
+
+    border-radius: 30px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #d29d12,
+            #f0ca4c
+        );
+}
+
+
+/* ==========================
+   RAZONES
+========================== */
+
+.reason {
+
+    min-height: 90vh;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+
+.reason-card {
+
+    width: 100%;
+
+    max-width: 680px;
+
+    text-align: center;
+
+    padding: 35px 30px;
+
+    border-radius: 30px;
+
+    background:
+        rgba(255, 255, 255, 0.66);
+
+    border:
+        1px solid rgba(180, 145, 65, 0.15);
+
+    box-shadow:
+        0 18px 40px rgba(70, 55, 20, 0.08);
+
+    opacity: 0;
+
+    transform: translateY(70px);
+
+    transition:
+        opacity 1.2s ease,
+        transform 1.2s ease;
+}
+
+
+.reason.visible .reason-card {
+
+    opacity: 1;
+
+    transform: translateY(0);
+}
+
+
+/* FLOR INDIVIDUAL */
+
+.reason-flower {
+
+    width: 170px;
+
+    margin: auto;
+
+    opacity: 0;
+
+    transform:
+        translateY(40px)
+        scale(0.85);
+
+    transition:
+        1.2s ease 0.15s;
+}
+
+
+.reason.visible .reason-flower {
+
+    opacity: 1;
+
+    transform:
+        translateY(0)
+        scale(1);
+}
+
+
+.reason-flower img {
+
+    width: 100%;
+
+    display: block;
+
+    filter:
+        drop-shadow(
+            0 16px 20px rgba(45, 55, 20, 0.13)
+        );
+}
+
+
+/* NUMERO */
+
+.number {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin-top: 12px;
+
+    margin-bottom: 18px;
+
+    width: 42px;
+
+    height: 42px;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #e0bd4b,
+            #c89512
+        );
+
+    color: white;
+
+    font-family: "Cormorant Garamond", serif;
+
+    font-size: 23px;
+
+    font-weight: 600;
+}
+
+
+/* TEXTO */
+
+.reason-text {
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        clamp(
+            35px,
+            5vw,
+            57px
+        );
+
+    line-height: 1.05;
+
+    font-weight: 500;
+
+    color: #3b3328;
+}
+
+
+/* ==========================
+   FINAL
+========================== */
+
+.final-section {
+
+    min-height: 100vh;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+
+    padding: 80px 20px;
+}
+
+
+.final-content {
+
+    opacity: 0;
+
+    transform: translateY(60px);
+
+    transition:
+        opacity 1.5s ease,
+        transform 1.5s ease;
+}
+
+
+.final-content.visible {
+
+    opacity: 1;
+
+    transform: translateY(0);
+}
+
+
+.final-small {
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        clamp(
+            22px,
+            4vw,
+            29px
+        );
+
+    font-style: italic;
+
+    color: #786a54;
+
+    margin-bottom: 18px;
+}
+
+
+.final-content h2 {
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        clamp(
+            90px,
+            16vw,
+            160px
+        );
+
+    font-weight: 500;
+
+    line-height: 0.9;
+
+    color: #332c22;
+}
+
+
+.heart {
+
+    margin-top: 24px;
+
+    font-size: 39px;
+
+    animation:
+        heartbeat
+        1.5s infinite;
+}
+
+
+@keyframes heartbeat {
+
+    0%,
+    100% {
+
+        transform: scale(1);
+
+    }
+
+    25% {
+
+        transform: scale(1.2);
+
+    }
+
+    45% {
+
+        transform: scale(1);
+
+    }
+
+    65% {
+
+        transform: scale(1.12);
+
+    }
+
+}
+
+
+/* ==========================
+   MOVIL
+========================== */
+
+@media (max-width: 850px) {
+
+    .story {
+
+        display: block;
+
+    }
+
+
+    .bouquet-area {
+
+        top: 8px;
+
+        z-index: 20;
+
+        padding: 9px 5px;
+
+        border-radius: 20px;
+    }
+
+
+    .bouquet-title {
+
+        font-size: 16px;
+
+    }
+
+
+    .bouquet-wrapper {
+
+        width: 220px;
+
+        height: 220px;
+
+        margin-top: 0;
+    }
+
+
+    .wrapper-paper {
+
+        width: 105px;
+
+        height: 100px;
+
+        bottom: 4px;
+    }
+
+
+    .wrapper-left {
+
+        left: 18px;
+    }
+
+
+    .wrapper-right {
+
+        right: 18px;
+    }
+
+
+    .ribbon {
+
+        bottom: 39px;
+
+        width: 55px;
+
+        height: 12px;
+    }
+
+
+    .bouquet-flower {
+
+        bottom: 37px;
+
+        width:
+            calc(
+                var(--width) * 0.61
+            );
+    }
+
+
+    .reason {
+
+        min-height: 80vh;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .hero {
+
+        padding-top: 60px;
+
+    }
+
+
+    h1 {
+
+        font-size: 53px;
+
+    }
+
+
+    .intro {
+
+        font-size: 16px;
+
+    }
+
+
+    .mini-tulip {
+
+        width: 125px;
+
+    }
+
+
+    .reason-card {
+
+        padding:
+            28px
+            18px;
+    }
+
+
+    .reason-flower {
+
+        width: 145px;
+
+    }
+
+
+    .reason-text {
+
+        font-size: 39px;
+
+    }
+
+
+    .final-content h2 {
+
+        font-size: 95px;
+
+    }
+
+}
